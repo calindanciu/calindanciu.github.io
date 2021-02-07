@@ -1,18 +1,27 @@
 module.exports = {
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
+  purge: [],
+  darkMode: false, // or 'media' or 'class'
+  theme: {
+    extend: {},
   },
-  purge: {
-    enabled: true,
-    content: [
-      "./**/*.html",
-      "./*.html"
-    ],
-    options: {
-      whitelist: [],
-    },
+  variants: {
+    extend: {},
   },
+  plugins: [],
+}
+module.exports = {
+  purge: [],
+  darkMode: false, // or 'media' or 'class'
+  theme: {
+    extend: {},
+  },
+  variants: {
+    extend: {},
+  },
+  plugins: [],
+}
+module.exports = {
+  
   theme: {
     extend: {
       minHeight: {
@@ -73,19 +82,5 @@ module.exports = {
       },
     },
   },
-  variants: [
-    "responsive",
-    "group-hover",
-    "focus-within",
-    "first",
-    "last",
-    "odd",
-    "even",
-    "hover",
-    "focus",
-    "active",
-    "visited",
-    "disabled",
-  ],
-  plugins: [require("@tailwindcss/custom-forms")],
+  
 };
