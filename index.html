@@ -43,7 +43,8 @@
       Calin Danciu
     </title>
   </head>
-  <body class="text-gray-800 antialiased">
+
+  <body class="text-gray-800 antialiased" x-data="animate()" x-init="init()">
 
     <nav
       class="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg"
@@ -61,20 +62,29 @@
           ><button
             class="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
             type="button"
-            onclick="toggleNavbar('example-collapse-navbar')"
+            @click="shownav = !shownav"
           >
             <i class="text-white fas fa-bars"></i>
           </button>
         </div>
         <div
-          class="lg:flex flex-grow items-center bg-white lg:bg-transparent lg:shadow-none hidden"
+          class="lg:flex flex-grow items-center bg-white lg:bg-transparent lg:shadow-none" :class="{'hidden': shownav}"
           id="example-collapse-navbar"
+          x-cloak
         >
-          <ul class="flex flex-col lg:flex-row list-none mr-auto">
+          <ul 
+            class="flex flex-col lg:flex-row list-none mr-auto"
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 transform scale-90"
+            x-transition:enter-end="opacity-100 transform scale-100"
+            x-transition:leave="transition ease-in duration-300"
+            x-transition:leave-start="opacity-100 transform scale-100"
+            x-transition:leave-end="opacity-0 transform scale-90"
+          >
             <li class="flex items-center">
               <a
                 class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                href="mailto: calindanciu@gmail.com"
+                href="mailto:calindanciu@gmail.com"
                 ><i
                   class="lg:text-gray-300 text-gray-500 far fa-file-alt text-lg leading-lg mr-2"
                 ></i>
@@ -122,7 +132,7 @@
                 class="bg-white text-gray-800 active:bg-gray-100 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
                 type="button"
               >
-                <i class="fas fa-arrow-alt-circle-down"></i> Portofolio
+                <i class="fas fa-project-diagram mr-2"></i> Projects
               </button>
             </li>
           </ul>
@@ -134,7 +144,7 @@
 
       <section class="relative block h-500-px">
         <div
-          class="fixed top-0 w-full h-full bg-center bg-cover"
+          class="absolute z-0 top-0 w-full h-full bg-center bg-cover"
           style="
             background-image: url('https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2710&q=80');
           "
@@ -169,14 +179,17 @@
 
         <div class="container mx-auto px-4">
           <div
-            class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-80"
+            class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-96"
           >
+
             <div class="px-6">
               <div class="flex flex-wrap justify-center">
-
+                
                 <div class="w-full lg:w-4/12 px-4 order-2 lg:order-1 relative">
-                  <div class="justify-center py-4 lg:pt-4 pt-8 mt-8">
-
+                  <div class="justify-center py-4 pt-8 mt-8">
+                    <div class="uppercase text-sm py-2 font-semibold text-right text-green-500">
+                      Skills
+                    </div>
                     <div class="relative pt-1 inline-block w-full">
                       <div class="flex mb-2 items-center justify-between">
                         <div>
@@ -191,7 +204,7 @@
                         </div>
                       </div>
                       <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-red-200">
-                        <div style="width: 95%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-600 animate-pulse"></div>
+                        <div id="skillbarhtml" class="w-0 shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-600 animate-pulse"></div>
                       </div>
                     </div>
 
@@ -209,7 +222,7 @@
                         </div>
                       </div>
                       <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-green-200">
-                        <div style="width:90%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-800 animate-pulse"></div>
+                        <div id="skillbarcss" class="w-0 shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-800 animate-pulse"></div>
                       </div>
                     </div>
 
@@ -227,7 +240,7 @@
                         </div>
                       </div>
                       <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-blue-200">
-                        <div style="width:80%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-800 animate-pulse"></div>
+                        <div id="skillbarphp" class="w-0 shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-800 animate-pulse"></div>
                       </div>
                     </div>
                     
@@ -240,12 +253,12 @@
                         </div>
                         <div class="text-right">
                           <span class="text-xs font-semibold inline-block text-pink-800">
-                            70%
+                            75%
                           </span>
                         </div>
                       </div>
                       <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-pink-200">
-                        <div style="width:70%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-pink-800 animate-pulse"></div>
+                        <div id="skillbarjs" class="w-0 shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-pink-800 animate-pulse"></div>
                       </div>
                     </div>
 
@@ -258,7 +271,7 @@
                   <div class="relative z-10">
                     <img
                       alt="..."
-                      src="assets/img/calin-150.jpg"
+                      src="assets/img/calindanciu_8022021.jpg"
                       class="shadow-xl rounded-full h-auto align-middle border-none absolute -mt-12 ml-8  max-w-150-px"
                     />
                   </div>
@@ -269,6 +282,10 @@
                       >
                         Calin Danciu
                       </h3>
+                      <div class="mb-2 text-gray-700 mt-0">
+                          <i class="far fa-envelope m-2 text-4xl text-gray-500 block"></i>
+                          calindanciu<i class="fas fa-at m-0 text-lg text-gray-500"></i>gmail.com
+                      </div>
                       <div
                         class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase"
                       >
@@ -471,32 +488,40 @@
       </div>
     </footer>
   </body>
-  <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+  
   <script>
-    /* Make dynamic date appear */
-    (function () {
-      if (document.getElementById("get-current-year")) {
-        document.getElementById(
-          "get-current-year"
-        ).innerHTML = new Date().getFullYear();
+    function animate(){
+      return {
+        w: 0,
+        skillbarNotVisible: true,
+        shownav: true,
+        init() {
+            setInterval(() => {
+              this.skillbarNotVisible = this.inViewport()
+              if(!this.skillbarNotVisible) {
+                this.w++;
+                if( this.w <= 400 ) this.test()
+              }
+            }, 10);
+        },
+        test(x){
+          var skillbarhtml  = document.getElementById('skillbarhtml')
+          var skillbarcss   = document.getElementById('skillbarcss')
+          var skillbarphp   = document.getElementById('skillbarphp')
+          var skillbarjs    = document.getElementById('skillbarjs')
+          if( this.w <= 95 ) skillbarhtml.style.width = this.w + '%'
+          if( this.w > 100 & this.w <= 190 ) skillbarcss.style.width  = (this.w - 100) + '%'
+          if( this.w > 200 & this.w <= 280 ) skillbarphp.style.width  = (this.w - 200) + '%'
+          if( this.w > 300 & this.w <= 375 ) skillbarjs.style.width   = (this.w - 300) + '%'
+        },
+        inViewport () {
+          var skillbarhtml  = document.getElementById('skillbarhtml')
+          var rect = skillbarhtml.getBoundingClientRect();
+          
+          return rect.bottom < 0 || rect.right < 0 || rect.left > window.innerWidth || rect.top > (window.innerHeight - 200);
+        }
       }
-    })();
-    /* Function for opning navbar on mobile */
-    function toggleNavbar(collapseID) {
-      document.getElementById(collapseID).classList.toggle("hidden");
-      document.getElementById(collapseID).classList.toggle("block");
-    }
-    /* Function for dropdowns */
-    function openDropdown(event, dropdownID) {
-      let element = event.target;
-      while (element.nodeName !== "A") {
-        element = element.parentNode;
-      }
-      Popper.createPopper(element, document.getElementById(dropdownID), {
-        placement: "bottom-start",
-      });
-      document.getElementById(dropdownID).classList.toggle("hidden");
-      document.getElementById(dropdownID).classList.toggle("block");
     }
   </script>
+  
 </html>
