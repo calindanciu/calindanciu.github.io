@@ -1,5 +1,30 @@
 @tailwind base;
-
 @tailwind components;
-
 @tailwind utilities;
+
+@layer components {
+    .project {
+        @apply max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl;
+    }
+    .project-canvas {
+        @apply md:flex;
+    }
+    .project-img-canvas {
+        @apply md:flex-shrink-0;
+    }
+    .project-img {
+        @apply h-48 w-full object-cover md:w-48;
+    }
+    .project-text-canvas {
+        @apply p-8;
+    }
+    .project-text-title {
+        @apply uppercase tracking-wide text-sm text-indigo-500 font-semibold;
+    }
+    .project-text-link {
+        @apply block mt-1 text-lg leading-tight font-medium text-black hover:underline;
+    }
+    .project-text {
+        @apply mt-2 text-gray-500;
+    }
+}
