@@ -4,7 +4,7 @@
 
 @layer components {
     .project {
-        @apply max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl;
+        @apply max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl min-w-full;
     }
     .project-canvas {
         @apply md:flex;
@@ -26,5 +26,8 @@
     }
     .project-text {
         @apply mt-2 text-gray-500;
+    }
+    .project-a {
+        @apply text-blue-800 hover:text-blue-500 underline text-sm;
     }
 }
