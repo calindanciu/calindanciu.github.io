@@ -60,11 +60,21 @@
         <div
           class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start"
         >
-          <a
+          <!-- <a
             class="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-no-wrap uppercase text-white"
             href="/"
             >#Calin</a
-          ><button
+          > -->
+          <a
+            class="text-white text-sm font-semibold"
+            @click="toggleLanguage=!toggleLanguage; languageChange();"
+            href="#"
+          >
+           <span class="underline" :class="{ 'underline': !toggleLanguage }">English</span> 
+           <i class="fas fa-language text-2xl align-middle"></i> 
+           <span :class="{ 'underline': toggleLanguage }">Deutsch</span>
+          </a>
+          <button
             class="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
             type="button"
             @click="shownav = !shownav"
@@ -73,7 +83,7 @@
           </button>
         </div>
         <div
-          class="lg:flex flex-grow items-center" :class="{'hidden': shownav}"
+          class="lg:flex flex-grow items-center" :class="{ 'hidden': shownav }"
           id="example-collapse-navbar"
           x-cloak
         >
@@ -89,14 +99,15 @@
           >
             <li class="flex items-center border-b-2 lg:border-none">
               <a
-                class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold bg-gray-50 lg:bg-transparent pl-5 block w-full hover:bg-white"
+                class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold bg-gray-50 lg:bg-transparent pl-5 lg:pl-3 lg:ml-2 block w-full hover:bg-white"
                 href="#"
                 @click="showModal = !showModal; message();"
-                ><i
+                >
+                <i
                   class="lg:text-gray-300 text-gray-500 far fa-file-alt text-lg leading-lg mr-2"
                 ></i>
-                Resume</a
-              >
+                <span x-text='resume'></span>
+              </a>
             </li>
           </ul>
           <ul class="flex flex-col lg:flex-row list-none lg:ml-auto" @click="shownav = !shownav">
@@ -114,7 +125,7 @@
                 <i
                   class="lg:text-gray-300 text-gray-500 fab fa-facebook text-lg leading-lg"
                 ></i>
-                <span class="lg:hidden inline-block ml-2">Share</span>
+                <span class="lg:hidden inline-block ml-2" x-text='share'></span>
               </a>
             </li>
             <li class="flex items-center border-b-2 lg:border-none bg-gray-50 lg:bg-transparent">
@@ -136,16 +147,17 @@
                 ><i
                   class="lg:text-gray-300 text-gray-500 fab fa-linkedin text-lg leading-lg"
                 ></i
-                ><span class="lg:hidden inline-block ml-2">LinkedIn</span></a
+                ><span class="lg:hidden inline-block ml-2" x-text="share"></span></a
               >
             </li>
             <li class="lg:flex lg:items-center block text-right w-full">
               <button
                 class="bg-white text-gray-800 active:bg-gray-100 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
                 type="button"
-                @click="showModal = !showModal; projects();"
+                @click="showModal = !showModal; projectsModal();"
               >
-                <i class="fas fa-project-diagram mr-2"></i> Projects
+                <i class="fas fa-project-diagram mr-2"></i> 
+                <span x-text="projectstxt"></span>
               </button>
             </li>
           </ul>
@@ -201,7 +213,7 @@
                 <div class="w-full lg:w-4/12 px-4 order-2 lg:order-1 relative">
                   <div class="justify-center py-4 pt-8 mt-8">
                     <div class="uppercase text-sm py-2 font-semibold text-right text-green-500">
-                      Skills
+                      <span x-text="skills"></span>
                     </div>
                     <div class="relative pt-1 inline-block w-full">
                       <div class="flex mb-2 items-center justify-between">
@@ -301,15 +313,15 @@
                         <i
                           class="fas fa-map-marker-alt mr-2 text-lg text-gray-500"
                         ></i>
-                        Wetzlar, Germany
+                        Wetzlar, <span x-text="countryname"></span>
                       </div>
                       <div class="mb-2 text-gray-700 mt-0">
-                        <i class="fas fa-briefcase mr-2 text-lg text-gray-500"></i
-                        >Web developer
+                        <i class="fas fa-briefcase mr-2 text-lg text-gray-500"></i> 
+                        <span x-text="developer"></span>
                       </div>
                       <div class="mb-2 text-gray-700 mt-0">
-                          <i class="fas fa-university mr-2 text-lg text-gray-500"></i
-                          >Engineering
+                          <i class="fas fa-university mr-2 text-lg text-gray-500"></i> 
+                          <span x-text='engineering'></span>
                       </div>
                     </div>
                 </div>
@@ -320,7 +332,7 @@
                     <div
                       class="bg-gray-50 p-2 text-sm uppercase font-semibold text-center"
                     >
-                      Let's talk about your project.<br />Book a meeting or send a message 
+                      <span x-html="bookMeeting"></span> 
                       <i class="far fa-envelope mr-2 text-xl align-middle cursor-pointer" @click="showModal = !showModal; message();"></i>
                     </div>
                     <!-- Calendly inline widget begin -->
@@ -336,12 +348,12 @@
                 <div class="flex flex-wrap justify-center">
                   <div class="w-full lg:w-10/12 px-8 lg:px-2">
                     <p class="mb-4 text-lg leading-relaxed text-gray-800">
-                        I'm a web developer with an engineering background. 
-                        I'm passionate about technology and I'm always looking for new ways to combine the new technologies and online tools in order to make a better product with better results.
-                        I like swimming, cycling and when I have time, I like reading news about IoT new devices and possibilities for smart homes and industrial automatisation.
+                        <span x-html="aboutme"></span>
                     </p>
                     <span class="p-4 mb-4 text-sm inline-block">
-                      I <i class="fas fa-heart  text-2xl px-2 text-red-500"></i> to work with:
+                      <span x-text="me"></span> 
+                      <i class="fas fa-heart  text-2xl px-2 text-red-500"></i> 
+                      <span x-text="technologies"></span>
                     </span>
                     <div 
                       class="font-normal text-gray-500 flex flex-wrap grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 items-center"
@@ -435,7 +447,7 @@
                       href="mailto:calindanciu@gmail.com"
                       class="text-blue-800 hover:text-blue-500 py-3 px-4 mt-8 inline-block"
                     >
-                      Request an updated resume on your email address.
+                      <span x-text="request"></span>
                     </a>
                   </div>
                 </div>
@@ -469,9 +481,9 @@
       <div class="container mx-auto px-4">
         <div class="flex flex-wrap text-center lg:text-left">
           <div class="w-full lg:w-6/12 px-4">
-            <h4 class="text-3xl font-semibold">Let's keep in touch!</h4>
+            <h4 class="text-3xl font-semibold" x-text="socialContact"></h4>
             <h5 class="text-lg mt-0 mb-2 text-gray-700">
-              Find me on any of these platforms:
+              <span x-text="socialprofiles"></span>
             </h5>
             <div class="flex flex-wrap justify-center lg:justify-start text-center items-center mt-6 lg:mb-0 mb-6">
               <a
@@ -516,8 +528,9 @@
               <div class="w-full lg:w-4/12 px-4 ml-auto">
                 <span
                   class="block uppercase text-gray-600 text-sm font-semibold mb-2"
-                  >Useful Links</span
-                >
+                  >
+                  <span x-text='usefullinks'></span>
+                </span>
                 <ul class="list-unstyled">
                   <li>
                     <a
@@ -525,8 +538,9 @@
                       href="https://www.forbes.com/sites/theyec/2020/02/03/why-every-business-needs-a-website/"
                       target="_blank"
                       rel="nofollow"
-                      >Why Every Business Needs A Website</a
-                    >
+                      >
+                      <span x-text="ulink1"></span>
+                    </a>
                   </li>
                   <li>
                     <a
@@ -534,16 +548,18 @@
                       href="https://woocommerce.com/posts/introduction-to-wordpress-and-woocommerce/#"
                       target="_blank"
                       rel="nofollow"
-                      >WooCommerce</a
-                    >
+                      >
+                        <span x-text="woocommerce"></span>
+                    </a>
                   </li>
                 </ul>
               </div>
               <div class="w-full lg:w-4/12 px-4">
                 <span
                   class="block uppercase text-gray-600 text-sm font-semibold mb-2"
-                  >Other Resources</span
-                >
+                  x-text="other"
+                  >
+                </span>
                 <ul class="list-unstyled">
                   <li>
                     <a
@@ -551,8 +567,9 @@
                       href="https://forms.gle/e2ohhytcghTyQhfK6"
                       target="_blank"
                       rel="nofollow"
-                      >Contact</a
-                    >
+                      x-text="contact"
+                      >
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -604,6 +621,35 @@
     
             <!-- content -->
             <div x-html="modalText"></div>
+            <div id="projects" x-show="showProjects">
+              <div class="grid grid-flow-row lg:grid-cols-2 grid-rows-2 gap-5 my-5">
+      
+                <template x-for="[id,obj] in Object.entries(items)" :key="id">
+                  <div class="project">
+                    <div class="project-canvas">
+                      <div class="project-img-canvas">
+                        <img 
+                          class="project-img" 
+                          x-bind:src="obj.img" 
+                          x-bind:alt="obj.text"
+                        >
+                      </div>
+                      <div class="project-text-canvas">
+                        <div class="project-text-tilte" x-text="obj.title"></div>
+                        <a 
+                          x-bind:href="obj.link" 
+                          class="project-a"
+                          target="_blank"
+                          x-text="obj.linktxt"
+                        ></a>
+                        <p class="project-text" x-text="obj.text"></p>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+                
+              </div>
+            </div>
     
             <!--Footer-->
             <div class="flex justify-end pt-2">
@@ -613,150 +659,15 @@
                 x-html="contactButton" 
                 x-show="showContactButton"
               ></button>
-              <button class="modal-close px-4 bg-blue-500 p-3 rounded-lg text-white hover:bg-blue-400" @click="showModal = false">Close</button>
+              <button class="modal-close px-4 bg-blue-500 p-3 rounded-lg text-white hover:bg-blue-400" @click="showModal = false" x-text="modalButton"></button>
             </div>
           </div>
           <!--/Dialog -->
         </div><!-- /Overlay -->
       </section>
 
-      <div id="projects" class="hidden" x-cloak>
-        <div class="grid grid-flow-row lg:grid-cols-2 grid-rows-2 gap-5 my-5">
-          <div class="project">
-            <div class="project-canvas">
-              <div class="project-img-canvas">
-                <img 
-                  class="project-img" 
-                  src="assets/img/projects/myproject-angled.jpg" 
-                  alt="MyProject Android App"
-                >
-              </div>
-              <div class="project-text-canvas">
-                <div class="project-text-tilte">MyProject App</div>
-                <a 
-                  href="https://play.google.com/store/apps/details?id=com.myprojectapp.android" 
-                  class="project-a"
-                  target="_blank"
-                >
-                  Google Play
-                </a>
-                <p class="project-text">Project management App.</p>
-              </div>
-            </div>
-          </div>
-          <div class="project">
-            <div class="project-canvas">
-              <div class="project-img-canvas">
-                <img 
-                  class="project-img" 
-                  src="assets/img/projects/wpplugin.jpg" 
-                  alt="News API WP Plugin"
-                >
-              </div>
-              <div class="project-text-canvas">
-                <div class="project-text-tilte">News Plugin for WordPress</div>
-                <a 
-                  href="https://wordpress.org/plugins/wpm-news-api/" 
-                  class="project-a"
-                  target="_blank"
-                >
-                  WordPress plugin
-                </a>
-                <p class="project-text">News publisher autopilot plugin.</p>
-              </div>
-            </div>
-          </div>
-          <div class="project">
-            <div class="project-canvas">
-              <div class="project-img-canvas">
-                <img 
-                  class="project-img" 
-                  src="assets/img/projects/wpmagic_mockup_800.png" 
-                  alt=""
-                >
-              </div>
-              <div class="project-text-canvas">
-                <div class="project-text-tilte">WPMagic</div>
-                <a 
-                  href="http://www.emailextractor.cloud/" 
-                  class="project-a"
-                  target="_blank"
-                >
-                  Website (PWA)
-                </a>
-                <p class="project-text">Plugins and themes for WordPress.</p>
-              </div>
-            </div>
-          </div>
-          <div class="project">
-            <div class="project-canvas">
-              <div class="project-img-canvas">
-                <img 
-                  class="project-img" 
-                  src="assets/img/projects/emailextractor_mockup_800.png" 
-                  alt=""
-                >
-              </div>
-              <div class="project-text-canvas">
-                <div class="project-text-tilte">Contacts Scraper</div>
-                <a 
-                  href="http://www.emailextractor.cloud/" 
-                  class="project-a"
-                  target="_blank"
-                >
-                  Website (PWA)
-                </a>
-                <p class="project-text">Find business contacts data online.</p>
-              </div>
-            </div>
-          </div>
-          <div class="project">
-            <div class="project-canvas">
-              <div class="project-img-canvas">
-                <img 
-                  class="project-img" 
-                  src="assets/img/projects/webtraffic_mockup_800.png" 
-                  alt=""
-                >
-              </div>
-              <div class="project-text-canvas">
-                <div class="project-text-tilte">Website visitors</div>
-                <a 
-                  href="https://www.webtraffic.cheap/" 
-                  class="project-a"
-                  target="_blank"
-                >
-                  Website (PWA)
-                </a>
-                <p class="project-text">Website visitors for any website.</p>
-              </div>
-            </div>
-          </div>
-          <div class="project">
-            <div class="project-canvas">
-              <div class="project-img-canvas">
-                <img 
-                  class="project-img" 
-                  src="assets/img/projects/jsonconverter_mockup_800.png" 
-                  alt=""
-                >
-              </div>
-              <div class="project-text-canvas">
-                <div class="project-text-tilte">JSON to CSV/TXT converter</div>
-                <a 
-                  href="https://jsonconverter.intteco.de/" 
-                  class="project-a"
-                  target="_blank"
-                >
-                  Website
-                </a>
-                <p class="project-text">Convert a JSON to CSV/TXT online.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      
+      
   </body>
   
   <script>
@@ -769,11 +680,14 @@
         modalTitle: '',
         modalText: '',
         showContactButton: false,
+        toggleLanguage: false,
         contactButton: '',
         getCurrentYear(){ 
           d = new Date()
           return y = d.getFullYear()
         },
+        showProjects: false,
+        items: [],
         init() {
             setInterval(() => {
               this.skillbarNotVisible = this.inViewport()
@@ -783,7 +697,9 @@
                   this.test()
                 }
               }
-            }, 7);
+            }, 3);
+            // display language
+            this.languageChange ()
         },
         test(){
           var skillbarhtml  = document.getElementById('skillbarhtml')
@@ -803,22 +719,135 @@
         },
         message () {
           window.scrollTo({top: 0, behavior: 'smooth'})
-          this.modalTitle         = 'Hi! <i class="far fa-hand-paper"></i>'
-          this.modalText          = '<p>Thank you for your interest in working together.</p><p>You can click on the "Contact" button bellow <i class="fas fa-arrow-down"></i> to send me a message (to calindanciu<i class="fas fa-at"></i>gmail.com). Please describe your project in a few words and I will get back to you as soon as possible.</p>'
-          this.showContactButton  = true
-          this.contactButton      = '<i class="far fa-hand-point-right"></i> Contact'
+          this.modalTitle             = 'Hi! <i class="far fa-hand-paper"></i>'
+          this.modalText              = '<p>Thank you for your interest in working together.</p><p>You can click on the "Contact" button bellow <i class="fas fa-arrow-down"></i> to send me a message (To: calindanciu<i class="fas fa-at"></i>gmail.com). Please describe your project in a few words and I will get back to you as soon as possible.</p>'
+          this.showContactButton      = true
+          this.contactButton          = '<i class="far fa-hand-point-right"></i> Contact'
+          this.showProjects           = false
+          var modal                   = document.getElementById("modal")
+          modal.style.backgroundColor = "#fff";
+          modal.style.maxWidth        = "28rem";
+
+          if( this.toggleLanguage ){
+            this.modalText            = '<p>Vielen Dank für Ihr Interesse an einer Zusammenarbeit.</p><p>Sie können unten auf die Schaltfläche "Kontakt" klicken <i class="fas fa-arrow-down"></i> um mir eine Nachricht zu senden (An: calindanciu<i class="fas fa-at"></i>gmail.com). Bitte beschreiben Sie Ihr Projekt in wenigen Worten und ich werde mich so schnell wie möglich bei Ihnen melden.</p>'
+            this.contactButton        = '<i class="far fa-hand-point-right"></i> Kontakt'
+          }
         },
-        projects () {
+        projectsModal () {
           var modal                   = document.getElementById("modal")
           var projects                = document.getElementById("projects")
           modal.style.width           = "83.333333%";
           modal.style.maxWidth        = "83.333333%";
           modal.style.backgroundColor = "#f5f5f5";
           this.modalTitle             = 'A couple of projects I\'ve made:'
-          this.modalText              = projects.innerHTML
+          this.modalText              = ''
+          this.showProjects           = true
           this.showContactButton      = true
           this.contactButton          = '<i class="far fa-hand-point-right"></i> Contact'
-        }
+        },
+        languageChange () {
+          // check if langauge chaged or the user browser language is de-DE
+          this.resume           = 'Resume'
+          this.share            = 'Share'
+          this.projectstxt      = 'Projects'
+          this.skills           = 'Skills'
+          this.countryname      = 'Germany'
+          this.developer        = 'Web developer'
+          this.engineering      = 'Engineering'
+          this.bookMeeting      = "Let's talk about your project.<br />Book a meeting or send a message"
+          this.aboutme          = "I'm a web developer with an engineering background. I'm passionate about technology and I'm always looking for new ways to combine the new technologies and online tools in order to make a better product with better results. I like swimming, cycling and when I have time, I like reading news about IoT new devices and possibilities for smart homes and industrial automatisation."
+          this.me               = 'I'
+          this.technologies     = 'to work with:'
+          this.request          = 'Request an updated resume on your email address.'
+          this.socialprofiles   = 'Find me on any of these platforms:'
+          this.usefullinks      = 'Useful Links'
+          this.ulink1           = 'Why Every Business Needs A Website'
+          this.woocommerce      = 'WooCommerce'
+          this.other            = 'Other Resources'
+          this.contact          = 'Contact'
+          this.modalButton      = 'Close'
+          this.socialContact    = "Let's keep in touch!"
+
+          if( navigator.language == 'de-DE' ) this.toggleLanguage = true
+
+          if( this.toggleLanguage ) {
+            this.resume           = 'Lebenslauf', 
+            this.share            = 'Teilen',
+            this.projectstxt      = 'Projekte'
+            this.skills           = 'Kompetenzen'
+            this.countryname      = 'Deutschland'
+            this.developer        = 'Webentwickler'
+            this.engineering      = 'Ingenieurwesen'
+            this.bookMeeting      = "Lassen Sie uns über Ihr Projekt sprechen. <br />Buchen Sie ein Meeting oder senden Sie eine Nachricht"
+            this.aboutme          = "Ich bin ein Webentwickler mit eine technischer Hintergrund. Ich mag alles über Technologien und ich versuche immer die Neue Technologien mit einanderen zu passen um eine neue bessere Produkt zu einbauen. Ich schwimme und fahre gern Rad und wenn ich Zeit habe, schaue ich mir die IoT-Nachrichten an."
+            this.me               = 'Ich'
+            this.technologies     = 'arbeiten mit:'
+            this.request          = 'Fordern Sie einen aktualisierten Lebenslauf auf Ihre E-Mail-Adresse an.'
+            this.socialprofiles   = 'Finden Sie mich auf einer dieser Plattformen:'
+            this.usefullinks      = 'Nützliche Links'
+            this.ulink1           = 'Warum jedes Unternehmen eine Website benötigt'
+            this.woocommerce      = 'WooCommerce'
+            this.other            = 'Andere Ressourcen'
+            this.contact          = 'Kontakt'
+            this.modalButton      = 'Schließen'
+            this.socialContact    = "Lass uns in Kontakt bleiben!"
+          }
+
+          projectsObj = {
+              1: {
+                id:       1,
+                title:    (!this.toggleLanguage) ? 'MyProject App' : 'MyProject App',
+                img:      'assets/img/projects/myproject-angled.jpg',
+                link:     'https://play.google.com/store/apps/details?id=com.myprojectapp.android',
+                linktxt:  (!this.toggleLanguage) ? 'Google Play' : 'Google Play',
+                text:     (!this.toggleLanguage) ? 'Project management App.' : 'Projektmanagement App.'
+              },
+              2: {
+                id:       2,
+                title:    (!this.toggleLanguage) ? 'News Plugin for WordPress' : 'News Plugin für WordPress',
+                img:      'assets/img/projects/wpplugin.jpg',
+                link:     'https://wordpress.org/plugins/wpm-news-api/',
+                linktxt:  (!this.toggleLanguage) ? 'WordPress plugin' : '',
+                text:     (!this.toggleLanguage) ? 'News publisher autopilot plugin.' : 'Autopilot-Plugin des Nachrichtenverlags.'
+              },
+              3: {
+                id:       3,
+                title:    (!this.toggleLanguage) ? 'WPMagic' : 'WPMagic',
+                img:      'assets/img/projects/wpmagic_mockup_800.png',
+                link:     'https://www.wpmagic.cloud/',
+                linktxt:  (!this.toggleLanguage) ? 'Website (PWA)' : '',
+                text:     (!this.toggleLanguage) ? 'Plugins and themes for WordPress.' : 'Plugins und Themes für WordPress.'
+              },
+              4: {
+                id:       4,
+                title:    (!this.toggleLanguage) ? 'Contacts Scraper' : 'Geschäftskontakten Online',
+                img:      'assets/img/projects/emailextractor_mockup_800.png',
+                link:     'http://www.emailextractor.cloud/',
+                linktxt:  (!this.toggleLanguage) ? 'Website (PWA)' : '',
+                text:     (!this.toggleLanguage) ? 'Find business contacts data online.' : 'Suchen Sie online nach Geschäftskontaktdaten.'
+              },
+              5: {
+                id:       5,
+                title:    (!this.toggleLanguage) ? 'Website visitors' : 'Website-Besucher',
+                img:      'assets/img/projects/webtraffic_mockup_800.png',
+                link:     'https://www.webtraffic.cheap/',
+                linktxt:  (!this.toggleLanguage) ? 'Website (PWA)' : '',
+                text:     (!this.toggleLanguage) ? 'Website visitors for any website.' : 'Website-Besucher für jede Website.'
+              },
+              6: {
+                id:       6,
+                title:    (!this.toggleLanguage) ? 'JSON to CSV/TXT converter' : 'JSON-CSV / TXT-Konverter',
+                img:      'assets/img/projects/jsonconverter_mockup_800.png',
+                link:     'https://jsonconverter.intteco.de/',
+                linktxt:  (!this.toggleLanguage) ? 'Website' : '',
+                text:     (!this.toggleLanguage) ? 'Convert a JSON to CSV/TXT online.' : 'Konvertieren Sie einen JSON online in CSV / TXT.'
+              }
+          }
+
+          // add project to DOM
+          this.items = projectsObj
+          console.log(this.items)
+        },
       }
     }
   </script>
