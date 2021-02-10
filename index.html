@@ -773,8 +773,8 @@
           this.modalButton      = 'Close'
           this.socialContact    = "Let's keep in touch!"
 
-          if( navigator.language == 'de-DE' ) this.toggleLanguage = true
-
+          if( navigator.language == 'de' ) this.toggleLanguage = true
+          
           if( this.toggleLanguage ) {
             this.resume           = 'Lebenslauf', 
             this.share            = 'Teilen',
@@ -851,7 +851,6 @@
 
           // add project to DOM
           this.items = projectsObj
-          console.log(this.items)
         },
       }
     }
