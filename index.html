@@ -67,7 +67,7 @@
           > -->
           <a
             class="text-white text-sm font-semibold"
-            @click="toggleLanguage=!toggleLanguage; languageChange();"
+            @click="toggleLanguage=!toggleLanguage; langMenuClick=true; languageChange();"
             href="#"
           >
            <span class="underline" :class="{ 'underline': !toggleLanguage }">English</span> 
@@ -687,6 +687,7 @@
           return y = d.getFullYear()
         },
         showProjects: false,
+        langMenuClick: false,
         items: [],
         init() {
             setInterval(() => {
@@ -773,7 +774,7 @@
           this.modalButton      = 'Close'
           this.socialContact    = "Let's keep in touch!"
 
-          if( navigator.language == 'de' ) this.toggleLanguage = true
+          if( !this.langMenuClick & navigator.language == 'de' ) this.toggleLanguage = true
           
           if( this.toggleLanguage ) {
             this.resume           = 'Lebenslauf', 
