@@ -744,6 +744,11 @@
           this.showProjects           = true
           this.showContactButton      = true
           this.contactButton          = '<i class="far fa-hand-point-right"></i> Contact'
+
+          if( this.toggleLanguage ){
+            this.modalTitle           = 'Ein paar Projekte, die ich gemacht habe:'
+            this.contactButton        = '<i class="far fa-hand-point-right"></i> Kontakt'
+          }
         },
         languageChange () {
           // check if langauge chaged or the user browser language is de-DE
